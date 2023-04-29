@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.6.7'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'groovy'
 }
 
 group = 'com.sasca'
@@ -30,6 +31,20 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // spock
+    testImplementation('org.spockframework:spock-core:2.1-groovy-3.0')
+    testImplementation('org.spockframework:spock-spring:2.1-groovy-3.0')
+
+    // runtime spock mocking
+    testImplementation('net.bytebuddy:byte-buddy:1.12.10')
+
+    // test container
+    testImplementation "org.testcontainers:spock:1.18.0"
+    testImplementation "org.testcontainers:mariadb:1.18.0"
+
+
+
 }
 
 tasks.named('test') {
