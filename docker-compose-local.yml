@@ -1,0 +1,25 @@
+version: "3.8"
+# https://docs.docker.com/compose/compose-file/compose-versioning/
+
+services:
+  sasca-api-redis:                    # 서비스명
+    container_name: sasca-api-redis   # 컨테이너명
+    build:
+      dockerfile: Dockerfile          # 도커 파일명
+      context: ./redis                # 도커 파일 경로
+    image: sasca37/sasca-api-redis    # 아이디/도커이미지명
+    ports:
+      - "6379:6379"                   # 포트 지정 (로컬/도커)
+  sasca-api-databse:
+    container_name: sasca-api-database
+    build:
+      dockerfile: Dockerfile
+      context: ./database
+    image: sasca37/sasca-api-database
+    environment:
+      - MARIADB_DATABASE=sasca-api-database
+      - MARIADB_ROOT_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+    volumes:
+      - ./database/config:/etc/mysql/conf.d                 # 호스트 디렉토리:도커 디렉토리
+    ports:
+      - "3306:3306"
