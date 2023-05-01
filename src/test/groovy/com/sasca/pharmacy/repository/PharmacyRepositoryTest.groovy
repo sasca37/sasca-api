@@ -4,6 +4,8 @@ import com.sasca.AbstractIntegrationBaseTest
 import com.sasca.pharmacy.entity.Pharmacy
 import org.springframework.beans.factory.annotation.Autowired
 
+import java.time.LocalDateTime
+
 class PharmacyRepositoryTest extends AbstractIntegrationBaseTest {
 
     @Autowired
@@ -54,5 +56,24 @@ class PharmacyRepositoryTest extends AbstractIntegrationBaseTest {
 
         then:
         result.size() == 1
+    }
+
+    def "BaseTimeEntity 등록"() {
+        given:
+        LocalDateTime now = LocalDateTime.now()
+        String address = "월드컵북로 502-36"
+        String name = "상암 약국"
+
+        def pharmacy = Pharmacy.builder()
+                .pharmacyAddress(address)
+                .pharmacyName(name)
+                .build()
+        when:
+        pharmacyRepository.save(pharmacy)
+        def result = pharmacyRepository.findAll()
+
+        then:
+        result.get(0).getCreateDate().isAfter(now)
+        result.get(0).getModifiedDate().isAfter(now)
     }
 }
