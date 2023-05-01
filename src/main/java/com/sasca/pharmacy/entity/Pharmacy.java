@@ -26,4 +26,8 @@ public class Pharmacy {
     private double latitude;
     private double longitude;
 
+    public void changePharmacyAddress(String newAddress) {
+        this.pharmacyAddress = newAddress;
+    }
+
 }
