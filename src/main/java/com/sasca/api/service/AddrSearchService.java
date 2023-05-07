@@ -31,7 +31,7 @@ public class AddrSearchService {
             return null;
         }
 
-        URI uri = uriBuilderService.getUriByAddr(address);
+        URI uri = uriBuilderService.buildUriByAddressSearch(address);
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, "KakaoAK " + kakaoRestApiKey);
 

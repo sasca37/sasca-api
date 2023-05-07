@@ -3,7 +3,6 @@ package com.sasca.api.service
 import org.springframework.boot.test.context.SpringBootTest
 import spock.lang.Specification
 
-import java.nio.charset.Charset
 import java.nio.charset.StandardCharsets
 
 @SpringBootTest
@@ -22,7 +21,7 @@ class UriBuilderServiceTest extends Specification {
         def charset = StandardCharsets.UTF_8;
 
         when:
-        def uri = uriBuilderService.getUriByAddr(addr)
+        def uri = uriBuilderService.buildUriByAddressSearch(addr)
         def decodeResult = URLDecoder.decode(uri.toString(), charset)
 
         then:

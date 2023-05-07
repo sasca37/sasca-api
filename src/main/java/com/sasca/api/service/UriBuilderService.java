@@ -13,7 +13,7 @@ public class UriBuilderService {
 
     private static final String KAOKAO_ADDR_URL = "https://dapi.kakao.com/v2/local/search/address.json";
 
-    public URI getUriByAddr(String address) {
+    public URI buildUriByAddressSearch(String address) {
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(KAOKAO_ADDR_URL);
         builder.queryParam("query", address);
         URI uri = builder.build().encode().toUri();
